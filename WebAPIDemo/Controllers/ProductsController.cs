@@ -16,10 +16,15 @@ namespace WebAPIDemo.Controllers
     {
         private FabricsEntities db = new FabricsEntities();
 
+        public ProductsController()
+        {
+            db.Configuration.LazyLoadingEnabled = false;
+        }
+
         // GET: api/Products
         public IQueryable<Product> GetProduct()
         {
-            return db.Product;
+            return db.Product.OrderByDescending(p => p.ProductId).Take(10);
         }
 
         // GET: api/Products/5
