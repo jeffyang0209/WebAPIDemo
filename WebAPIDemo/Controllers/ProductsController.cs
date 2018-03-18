@@ -38,6 +38,7 @@ namespace WebAPIDemo.Controllers
         /// 取得所有商品
         /// </summary>
         /// <returns></returns>
+        [Route("prod")]
         public IQueryable<Product> GetProduct()
         {
             return db.Product.OrderByDescending(p => p.ProductId).Take(10);
@@ -48,7 +49,12 @@ namespace WebAPIDemo.Controllers
         /// </summary>
         /// <param name="id">商品ID</param>
         /// <returns></returns>
+        // 屬性路由
+        // http://localhost:40098/prod/1555
+        // 無屬性路由
+        // http://localhost:40098/api/products/1556
         [ResponseType(typeof(Product))]
+        [Route("prod/{id}")]
         public IHttpActionResult GetProduct(int id)
         {
             Product product = db.Product.Find(id);

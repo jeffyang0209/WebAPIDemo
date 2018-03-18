@@ -502,6 +502,13 @@
             <param name="product">商品資料</param>
             <returns></returns>
         </member>
+        <member name="M:WebAPIDemo.Controllers.ProductsController.PostProduct(WebAPIDemo.Models.Product)">
+            <summary>
+            新增商品
+            </summary>
+            <param name="product">商品資料</param>
+            <returns></returns>
+        </member>
         <member name="M:WebAPIDemo.Controllers.ProductsController.DeleteProduct(System.Int32)">
             <summary>
             刪除商品
