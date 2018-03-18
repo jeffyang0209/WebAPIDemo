@@ -11,7 +11,7 @@ namespace WebAPIDemo
         {
             // Web API 設定和服務
 
-            // Web API 路由
+            // Web API 屬性路由
             config.MapHttpAttributeRoutes();
 
             // 傳統路由

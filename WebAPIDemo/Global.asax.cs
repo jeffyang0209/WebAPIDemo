@@ -14,8 +14,10 @@ namespace WebAPIDemo
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            // API路由
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            // MVC路由
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
