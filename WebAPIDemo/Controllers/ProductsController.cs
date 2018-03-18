@@ -31,7 +31,10 @@ namespace WebAPIDemo.Controllers
             db.Configuration.LazyLoadingEnabled = false;
         }
 
-        // GET: api/Products
+        /// <summary>
+        /// test
+        /// </summary>
+        /// <returns></returns>
         public IQueryable<Product> GetProduct()
         {
             return db.Product.OrderByDescending(p => p.ProductId).Take(10);
