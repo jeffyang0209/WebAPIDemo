@@ -16,6 +16,16 @@ namespace WebAPIDemo.Controllers
     {
         private FabricsEntities db = new FabricsEntities();
 
+        /* 1.GET
+         * 2.GetProduct
+         * 3.GetProduct(id)
+         * 4.GetProduct1
+         * 
+         * 1、2是一樣的東西
+         * 3是拿單筆資料
+         * 4加入時會與1或2衝突
+         */
+
         public ProductsController()
         {
             db.Configuration.LazyLoadingEnabled = false;
