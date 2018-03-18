@@ -32,7 +32,7 @@ namespace WebAPIDemo.Controllers
         }
 
         /// <summary>
-        /// test
+        /// 取得所有商品
         /// </summary>
         /// <returns></returns>
         public IQueryable<Product> GetProduct()
@@ -40,7 +40,11 @@ namespace WebAPIDemo.Controllers
             return db.Product.OrderByDescending(p => p.ProductId).Take(10);
         }
 
-        // GET: api/Products/5
+        /// <summary>
+        /// 取得單筆商品
+        /// </summary>
+        /// <param name="id">商品ID</param>
+        /// <returns></returns>
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
@@ -53,7 +57,12 @@ namespace WebAPIDemo.Controllers
             return Ok(product);
         }
 
-        // PUT: api/Products/5
+        /// <summary>
+        /// 更新商品
+        /// </summary>
+        /// <param name="id">商品ID</param>
+        /// <param name="product">商品資料</param>
+        /// <returns></returns>
         [ResponseType(typeof(void))]
         public IHttpActionResult PutProduct(int id, Product product)
         {
@@ -88,7 +97,11 @@ namespace WebAPIDemo.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Products
+        /// <summary>
+        /// 新增商品
+        /// </summary>
+        /// <param name="product">商品資料</param>
+        /// <returns></returns>
         [ResponseType(typeof(Product))]
         public IHttpActionResult PostProduct(Product product)
         {
@@ -103,7 +116,11 @@ namespace WebAPIDemo.Controllers
             return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
         }
 
-        // DELETE: api/Products/5
+        /// <summary>
+        /// 刪除商品
+        /// </summary>
+        /// <param name="id">商品ID</param>
+        /// <returns></returns>
         [ResponseType(typeof(Product))]
         public IHttpActionResult DeleteProduct(int id)
         {
@@ -128,6 +145,11 @@ namespace WebAPIDemo.Controllers
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// 依據商品ID查詢商品是否存在
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ProductExists(int id)
         {
             return db.Product.Count(e => e.ProductId == id) > 0;

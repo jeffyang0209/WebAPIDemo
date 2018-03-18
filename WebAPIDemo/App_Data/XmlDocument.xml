@@ -483,8 +483,44 @@
         </member>
         <member name="M:WebAPIDemo.Controllers.ProductsController.GetProduct">
             <summary>
-            test
+            取得所有商品
             </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPIDemo.Controllers.ProductsController.GetProduct(System.Int32)">
+            <summary>
+            取得單筆商品
+            </summary>
+            <param name="id">商品ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPIDemo.Controllers.ProductsController.PutProduct(System.Int32,WebAPIDemo.Models.Product)">
+            <summary>
+            更新商品
+            </summary>
+            <param name="id">商品ID</param>
+            <param name="product">商品資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPIDemo.Controllers.ProductsController.PostProduct(WebAPIDemo.Models.Product)">
+            <summary>
+            新增商品
+            </summary>
+            <param name="product">商品資料</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPIDemo.Controllers.ProductsController.DeleteProduct(System.Int32)">
+            <summary>
+            刪除商品
+            </summary>
+            <param name="id">商品ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebAPIDemo.Controllers.ProductsController.ProductExists(System.Int32)">
+            <summary>
+            依據商品ID查詢商品是否存在
+            </summary>
+            <param name="id"></param>
             <returns></returns>
         </member>
     </members>
