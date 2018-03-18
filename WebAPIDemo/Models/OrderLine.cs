@@ -9,6 +9,7 @@
 
 namespace WebAPIDemo.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -20,7 +21,9 @@ namespace WebAPIDemo.Models
         public decimal Qty { get; set; }
         public decimal LineTotal { get; set; }
     
+        [JsonIgnore]
         public virtual Order Order { get; set; }
+        [JsonIgnore]
         public virtual Product Product { get; set; }
     }
 }

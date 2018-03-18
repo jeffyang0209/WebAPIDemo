@@ -54,7 +54,7 @@ namespace WebAPIDemo.Controllers
         // 無屬性路由
         // http://localhost:40098/api/products/1556
         [ResponseType(typeof(Product))]
-        [Route("prod/{id}")]
+        [Route("prod/{id:int}")]
         public IHttpActionResult GetProduct(int id)
         {
             Product product = db.Product.Find(id);
@@ -162,6 +162,18 @@ namespace WebAPIDemo.Controllers
         private bool ProductExists(int id)
         {
             return db.Product.Count(e => e.ProductId == id) > 0;
+        }
+
+        [Route("prod/{id:int}/orderlines")]
+        public IHttpActionResult GetProductOrderLines(int id)
+        {
+            Product product = db.Product.Include("OrderLine").FirstOrDefault(p => p.ProductId == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product.OrderLine.ToList());
         }
     }
 }
