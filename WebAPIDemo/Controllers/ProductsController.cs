@@ -26,6 +26,9 @@ namespace WebAPIDemo.Controllers
          * 4加入時會與1或2衝突
          */
 
+         /* 如何關閉swagge cs1591 遺漏可見XML
+          */
+
         public ProductsController()
         {
             db.Configuration.LazyLoadingEnabled = false;
