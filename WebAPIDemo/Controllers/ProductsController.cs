@@ -56,7 +56,7 @@ namespace WebAPIDemo.Controllers
         // http://localhost:40098/api/products/1556
         //[Route("prod/{id:int}")]
         // Route("{id}")] 全域套用[RoutePrefix("prod")]
-        [Route("{id}")]
+        [Route("{id}",Name = "GetProductById")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
@@ -127,7 +127,9 @@ namespace WebAPIDemo.Controllers
             db.Product.Add(product);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
+            // 使路由資訊可以對應到GET BY ID
+            // ACTION NAME = GetProduct
+            return CreatedAtRoute("GetProductById", new { id = product.ProductId }, product);
         }
 
         /// <summary>
