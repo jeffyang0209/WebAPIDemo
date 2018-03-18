@@ -197,5 +197,25 @@ namespace WebAPIDemo.Controllers
                 Content = new ObjectContent<Product>(result, GlobalConfiguration.Configuration.Formatters.JsonFormatter)
             };
         }
+
+        public class Uri
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+        }
+        [Route("GetUri")]
+        public IHttpActionResult GetUri([FromUri]Uri uri)
+        {
+            return Ok(uri);
+        }
+
+        [Route("Body")]
+        public IHttpActionResult PostBody([FromBody]string name)
+        {
+            // JSON傳入 { "Name": "Jeff"}的結果為nulol
+            // JSON傳入 "Jeff"的結果為Jeff
+            // 第二個才是正解
+            return Ok(name);
+        }
     }
 }
