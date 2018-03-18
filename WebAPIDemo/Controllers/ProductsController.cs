@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Description;
 using WebAPIDemo.Models;
@@ -56,7 +57,7 @@ namespace WebAPIDemo.Controllers
         // http://localhost:40098/api/products/1556
         //[Route("prod/{id:int}")]
         // Route("{id}")] 全域套用[RoutePrefix("prod")]
-        [Route("{id}",Name = "GetProductById")]
+        [Route("{id}", Name = "GetProductById")]
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)
         {
@@ -182,6 +183,19 @@ namespace WebAPIDemo.Controllers
             }
 
             return Ok(product.OrderLine.ToList());
+        }
+
+        [Route("{id}/httpResponse")]
+        public HttpResponseMessage GetHttpResponse(int id)
+        {
+            var result = db.Product.Where(p => p.ProductId == id).First();
+            if (result == null) return new HttpResponseMessage(HttpStatusCode.NoContent);
+
+            return new HttpResponseMessage
+            {
+                ReasonPhrase = "OKK",
+                Content = new ObjectContent<Product>(result, GlobalConfiguration.Configuration.Formatters.JsonFormatter)
+            };
         }
     }
 }
