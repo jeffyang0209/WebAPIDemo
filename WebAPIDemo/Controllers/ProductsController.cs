@@ -12,6 +12,7 @@ using WebAPIDemo.Models;
 
 namespace WebAPIDemo.Controllers
 {
+    [RoutePrefix("prod")]
     public class ProductsController : ApiController
     {
         private FabricsEntities db = new FabricsEntities();
@@ -26,8 +27,8 @@ namespace WebAPIDemo.Controllers
          * 4加入時會與1或2衝突
          */
 
-         /* 如何關閉swagge cs1591 遺漏可見XML
-          */
+        /* 如何關閉swagge cs1591 遺漏可見XML
+         */
 
         public ProductsController()
         {
@@ -38,7 +39,7 @@ namespace WebAPIDemo.Controllers
         /// 取得所有商品
         /// </summary>
         /// <returns></returns>
-        [Route("prod")]
+        [Route("")]
         public IQueryable<Product> GetProduct()
         {
             return db.Product.OrderByDescending(p => p.ProductId).Take(10);
@@ -53,8 +54,10 @@ namespace WebAPIDemo.Controllers
         // http://localhost:40098/prod/1555
         // 無屬性路由
         // http://localhost:40098/api/products/1556
+        //[Route("prod/{id:int}")]
+        // Route("{id}")] 全域套用[RoutePrefix("prod")]
+        [Route("{id}")]
         [ResponseType(typeof(Product))]
-        [Route("prod/{id:int}")]
         public IHttpActionResult GetProduct(int id)
         {
             Product product = db.Product.Find(id);
@@ -73,6 +76,7 @@ namespace WebAPIDemo.Controllers
         /// <param name="product">商品資料</param>
         /// <returns></returns>
         [ResponseType(typeof(void))]
+        [Route("{id}")]
         public IHttpActionResult PutProduct(int id, Product product)
         {
             if (!ModelState.IsValid)
@@ -112,6 +116,7 @@ namespace WebAPIDemo.Controllers
         /// <param name="product">商品資料</param>
         /// <returns></returns>
         [ResponseType(typeof(Product))]
+        [Route("")]
         public IHttpActionResult PostProduct(Product product)
         {
             if (!ModelState.IsValid)
@@ -131,6 +136,7 @@ namespace WebAPIDemo.Controllers
         /// <param name="id">商品ID</param>
         /// <returns></returns>
         [ResponseType(typeof(Product))]
+        [Route("{id}")]
         public IHttpActionResult DeleteProduct(int id)
         {
             Product product = db.Product.Find(id);
@@ -164,7 +170,7 @@ namespace WebAPIDemo.Controllers
             return db.Product.Count(e => e.ProductId == id) > 0;
         }
 
-        [Route("prod/{id:int}/orderlines")]
+        [Route("{id:int}/orderlines")]
         public IHttpActionResult GetProductOrderLines(int id)
         {
             Product product = db.Product.Include("OrderLine").FirstOrDefault(p => p.ProductId == id);
